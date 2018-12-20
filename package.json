@@ -1,8 +1,12 @@
 {
   "name": "fitness-app",
-  "version": "1.0.0",
-  "description": "* Enter how many steps you have taken and get the amount traveled in miles  \r   * Enter in how many minutes you biked and at what speed, and get an estimate for how many miles you traveled  \r   * Suggest workouts to perform",
-  "main": "index.js",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
   "dependencies": {
     "@vue/cli": "^3.2.1",
     "axios": "^0.18.0",
@@ -14,18 +18,46 @@
     "vue": "^2.5.17",
     "vue-router": "^3.0.1"
   },
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.0.5",
+    "@vue/cli-plugin-eslint": "^3.0.5",
+    "@vue/cli-service": "^3.0.5",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.8.0",
+    "eslint-plugin-vue": "^5.0.0-0",
+    "vue-template-compiler": "^2.5.17"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/VictiniStar101/Fitness-app.git"
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "rules": {},
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
   },
-  "author": "Faizan Jamil",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/VictiniStar101/Fitness-app/issues"
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
   },
-  "homepage": "https://github.com/VictiniStar101/Fitness-app#readme"
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
+},
+
+"author": "Faizan Jamil",
+"license": "ISC",
+"bugs": {
+  "url": "https://github.com/VictiniStar101/Fitness-app/issues"
+},
+"homepage": "https://github.com/VictiniStar101/Fitness-app#readme"
 }
+
