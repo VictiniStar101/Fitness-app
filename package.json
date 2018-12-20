@@ -50,14 +50,13 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
-},
+  ],
+  "homepage": "https://github.com/VictiniStar101/Fitness-app#readme",
+  "author": "Faizan Jamil",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VictiniStar101/Fitness-app/issues"
+  }
 
-"author": "Faizan Jamil",
-"license": "ISC",
-"bugs": {
-  "url": "https://github.com/VictiniStar101/Fitness-app/issues"
-},
-"homepage": "https://github.com/VictiniStar101/Fitness-app#readme"
 }
-
+  
