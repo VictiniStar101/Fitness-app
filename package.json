@@ -4,8 +4,15 @@
   "description": "* Enter how many steps you have taken and get the amount traveled in miles  \r   * Enter in how many minutes you biked and at what speed, and get an estimate for how many miles you traveled  \r   * Suggest workouts to perform",
   "main": "index.js",
   "dependencies": {
+    "@vue/cli": "^3.2.1",
+    "axios": "^0.18.0",
+    "bootstrap": "^4.1.3",
     "express": "^4.16.4",
-    "joi": "^14.0.0"
+    "joi": "^14.0.0",
+    "jquery": "^3.3.1",
+    "popper.js": "^1.14.4",
+    "vue": "^2.5.17",
+    "vue-router": "^3.0.1"
   },
   "devDependencies": {},
   "scripts": {
