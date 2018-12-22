@@ -1,14 +1,17 @@
 const Joi = require('joi');
 const express = require('express');
+//const {User} = require('./model');
 
+//var 
 const app = express();
 app.use(express.json());
 const users = [
-    {id: 1, name: 'faizan', exercises: ''},
+    {id: 1, name: 'faizan', exercises: 'sit-ups'},
     {id: 2, name: 'amy'},
     {id: 3, name: 'don'},
 ];
 
+//validate user
 function validateUser(user) {
     const schema = {
         name: Joi.string().min(2).required(),
@@ -16,8 +19,9 @@ function validateUser(user) {
     }
     return Joi.validate(user, schema);
     
-};
+}
 
+//if user were to go to /, would print hello world
 app.get('/', (req,res) => {
     res.send('Hello world');
 });
@@ -93,5 +97,5 @@ app.get('/api/users/:id', (req,res) =>{
     res.send(user);
 });*/
 //PORT
-const port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`Listening on port ${port}`));
+//const port = process.env.PORT || 3000;
+//app.listen(port, () => console.log(`Listening on port ${port}`));
