@@ -1,62 +1,24 @@
 {
   "name": "fitness-app",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
-  },
+  "version": "1.0.0",
+  "description": "* Enter how many steps you have taken and get the amount traveled in miles  \r   * Enter in how many minutes you biked and at what speed, and get an estimate for how many miles you traveled  \r   * Suggest workouts to perform",
+  "main": "index.js",
   "dependencies": {
-    "@babel/runtime-corejs2": "^7.2.0",
-    "axios": "^0.18.0",
-    "bootstrap": "^4.1.3",
-    "core-js": "^2.6.1",
     "express": "^4.16.4",
-    "joi": "^14.0.0",
-    "jquery": "^3.3.1",
-    "popper.js": "^1.14.4",
-    "vue": "^2.5.17",
-    "vue-router": "^3.0.1",
-    "vue-select": "^2.5.1"
+    "joi": "^14.0.0"
   },
-  "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.0.5",
-    "@vue/cli-plugin-eslint": "^3.0.5",
-    "@vue/cli-service": "^3.0.5",
-    "babel-eslint": "^10.0.1",
-    "eslint": "^5.8.0",
-    "eslint-plugin-vue": "^5.0.0-0",
-    "vue-template-compiler": "^2.5.17"
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "rules": {},
-    "parserOptions": {
-      "parser": "babel-eslint"
-    }
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VictiniStar101/Fitness-app.git"
   },
-  "postcss": {
-    "plugins": {
-      "autoprefixer": {}
-    }
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
-  ],
-  "homepage": "https://github.com/VictiniStar101/Fitness-app#readme",
   "author": "Faizan Jamil",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/VictiniStar101/Fitness-app/issues"
-  }
+  },
+  "homepage": "https://github.com/VictiniStar101/Fitness-app#readme"
 }
