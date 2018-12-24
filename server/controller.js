@@ -1,14 +1,16 @@
 const Joi = require('joi');
 const express = require('express');
+//const {User} = require('./model');
+const app = express.Router();
+//var 
 
-const app = express();
-app.use(express.json());
 const users = [
-    {id: 1, name: 'faizan', exercises: ''},
+    {id: 1, name: 'faizan', exercises: 'sit-ups'},
     {id: 2, name: 'amy'},
     {id: 3, name: 'don'},
 ];
 
+//validate user
 function validateUser(user) {
     const schema = {
         name: Joi.string().min(2).required(),
@@ -16,11 +18,8 @@ function validateUser(user) {
     }
     return Joi.validate(user, schema);
     
-};
+}
 
-app.get('/', (req,res) => {
-    res.send('Hello world');
-});
 
 
 //define example routes
@@ -38,6 +37,7 @@ app.post('/api/users', (req,res) => {
         return;
     }
 
+    //creates data for user
     const user = {
         id: users.length + 1,
         name: req.body.name,
@@ -85,13 +85,10 @@ app.get('/api/users/:id', (req,res) =>{
     //look up user
     const user = users.find(c => c.id === parseInt(req.params.id));
     if (!user) res.status(404).send('The user with the given id was not found');
-
     //delete
     const index = users.indexOf(user);
     users.splice(index, 1);
     //return same user
     res.send(user);
 });*/
-//PORT
-const port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`Listening on port ${port}`));
+module.exports = app;
