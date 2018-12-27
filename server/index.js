@@ -40,12 +40,12 @@ app.get('/api/users', (req,res) => {
 //creates a new user
 app.post('/api/users', (req,res) => {
     //validate
-    const { error } = validateUser(req.body); //result.error
+    /*const { error } = validateUser(req.body); //result.error
     //if invalid, return 400- bad request
     if (error) {
         res.status(400).send(error.details[0].message);
         return;
-    }
+    }*/
 
     //creates data for user
     const user = {
@@ -56,21 +56,22 @@ app.post('/api/users', (req,res) => {
     users.push(user);
     res.send(user);
 });
-//lookup user with id specified
+//updates user with id specified
 app.put('/api/users/:id', (req,res) =>{
     
     //if not existing return 404
     let user = users.find(c => c.id === parseInt(req.params.id));
     if (!user) res.status(404).send('The user with the given id was not found');
-
+    
     //validate
-
+    /*
     const { error } = validateUser(req.body); //result.error
     //if invalid, return 400- bad request
     if (error) {
         res.status(400).send(error.details[0].message);
         return;
-    }
+    }*/
+    
     //update user
     //updates name
     //updates exercises
@@ -91,7 +92,7 @@ app.get('/api/users/:id', (req,res) =>{
 });
 
 //delete user (Not Functioning)
-/*app.delete('api/users/delete/:id', (req, res) => {
+/*app.delete('api/users/:id', (req, res) => {
     //look up user
     const user = users.find(c => c.id === parseInt(req.params.id));
     if (!user) res.status(404).send('The user with the given id was not found');
