@@ -91,7 +91,7 @@ app.get('/api/users/:id', (req,res) =>{
 });
 
 //delete user (Not Functioning)
-/*app.delete('api/users/:id', (req, res) => {
+/*app.delete('api/users/delete/:id', (req, res) => {
     //look up user
     const user = users.find(c => c.id === parseInt(req.params.id));
     if (!user) res.status(404).send('The user with the given id was not found');

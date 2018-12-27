@@ -4,6 +4,9 @@ class User {
         this.id = id;
         this.exercises = [];
         this.reps = [];
+        this.steps;
+        this.miles = this.steps / 2000;
+
     }
 }
 
