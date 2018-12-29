@@ -1,14 +1,14 @@
 const express = require('express');
 const Joi = require('joi');
-//const user = require('./user/controller.js')
+// const user = require('./user/controller.js')
 const app = express();
 const port = 3000;
 const server = "localhost";
 app.use(express.json());
 
-//const {User} = require('./model');
-//var user = new User();
-//var 
+// const {User} = require('./model'); 
+// var user = new User();
+// var
 
 const users = [
     {id: 1, name: 'faizan', exercises: 'sit-ups'},
@@ -26,19 +26,17 @@ function validateUser(user) {
     
 }
 
-
-
-//define example routes
-//if user were to go to /, would print hello world
-app.get('/', (req,res) => {
+// define example routes
+// if user were to go to /, would print hello world
+app.get('/', (req, res) => {
     res.send('Hello world');
 });
 //send full list of users
-app.get('/api/users', (req,res) => {
+app.get('/api/users', (req, res) => {
     res.send(users);
 });
 //creates a new user
-app.post('/api/users', (req,res) => {
+app.post('/api/users', (req, res) => {
     //validate
     /*const { error } = validateUser(req.body); //result.error
     //if invalid, return 400- bad request
@@ -57,8 +55,7 @@ app.post('/api/users', (req,res) => {
     res.send(user);
 });
 //updates user with id specified
-app.put('/api/users/:id', (req,res) =>{
-    
+app.put('/api/users/:id', (req, res) => {
     //if not existing return 404
     let user = users.find(c => c.id === parseInt(req.params.id));
     if (!user) res.status(404).send('The user with the given id was not found');
@@ -84,7 +81,7 @@ app.put('/api/users/:id', (req,res) =>{
 
 
 //get user name corresponding to id entered
-app.get('/api/users/:id', (req,res) =>{
+app.get('/api/users/:id', (req, res) => {
     let user = users.find(c => c.id === parseInt(req.params.id));
     if (!user) res.status(404).send('The user with the given id was not found');
     res.send(user);
