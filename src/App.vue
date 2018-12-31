@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="container">
     <div class="display-3">
-      <img alt="Vue logo" src="/assets/logo.png" id="logo">
+      <img alt="Vue logo" src="./assets/logo.png" id="logo">
       Fitness app  
     </div>
     <Nav />
