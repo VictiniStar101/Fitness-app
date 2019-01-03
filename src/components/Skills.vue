@@ -28,7 +28,7 @@
 <script>
 // where logic goes
 export default {
-  name: 'About',
+  name: 'Skills',
   data () {
     return {
       skills: [
