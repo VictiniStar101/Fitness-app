@@ -2,7 +2,7 @@
   <div id="app" class="container">
     <div class="display-3">
       <img alt="Vue logo" src="./assets/logo.png" id="logo">
-        Fitness app  
+        Fitness app
     </div>
     <Nav />
     <router-view/>

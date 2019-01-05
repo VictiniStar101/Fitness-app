@@ -13,11 +13,9 @@
       <p v-if="skills.length >= 1"> You have more than one skill</p>
       <p v-else>You have less than one skill</p>
       -->
-    </div>    
+    </div>
   <!-- btn example
-    
     About
-
     {{ name }}
     {{ btnState ? 'The button is disabled' : 'The button is active'}}
     <button v-on:click="changeName" v-bind:disabled="btnState">Change Name</button>
@@ -32,12 +30,11 @@ export default {
   data () {
     return {
       skills: [
-        {"skill": "Vue.js"},
-        {"skill": "Python"}
-        
-        ]
-      // name: 'Faizan',
-      // btnState: false
+        { 'skill': 'Vue.js' },
+        { 'skill': 'Python' }
+      ]
+    // name: 'Faizan',
+    // btnState: false
     }
   }
 }
