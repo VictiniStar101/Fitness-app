@@ -8,6 +8,16 @@
         <div class="row">
           <div class="col" >
             <h5>Current user information</h5>
+            <h6>Name</h6>
+            <p>Faizan</p>
+            <h6>Nickname</h6>
+            <p>None</p>
+            <h6>Exercises</h6>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">First item</li>
+              <li class="list-group-item">Second item</li>
+              <li class="list-group-item">Third item</li>
+            </ul>
           </div>
           <div class="col" >
             <button v-if="user==''" type="button" class="btn btn-info">Login here</button>
@@ -50,7 +60,9 @@ export default {
   name: 'profile',
   data () {
     return {
-      user: 'faizan'
+      nickname: '',
+      user: 'faizan',
+      exercises: []
     }
   }
 }
