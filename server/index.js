@@ -25,6 +25,7 @@ function validateUser(user) {
     return Joi.validate(user, schema);
     
 }
+// access control
 
 // define example routes
 // if user were to go to /, would print hello world
@@ -36,7 +37,7 @@ app.get('/api/users', (req, res) => {
     res.send(users);
 });
 //creates a new user
-app.post('/api/users', (req, res) => {
+app.post('/api/users/add', (req, res) => {
     //validate
     /*const { error } = validateUser(req.body); //result.error
     //if invalid, return 400- bad request
@@ -55,7 +56,7 @@ app.post('/api/users', (req, res) => {
     res.send(user);
 });
 //updates user with id specified
-app.put('/api/users/:id', (req, res) => {
+app.put('/api/users/update/:id', (req, res) => {
     //if not existing return 404
     let user = users.find(c => c.id === parseInt(req.params.id));
     if (!user) res.status(404).send('The user with the given id was not found');
