@@ -1,4 +1,4 @@
-class User {
+class Profile {
     constructor(name, id){
         this.name = name;
         this.id = id;
@@ -6,6 +6,7 @@ class User {
         this.reps = [];
         this.steps;
         this.miles = this.steps / 2000;
+        this.password = '';
 
     }
 }
@@ -13,5 +14,5 @@ class User {
 
 
 module.exports = {
-    User
+    Profile
 }
