@@ -1,20 +1,22 @@
 const express = require('express');
 const Joi = require('joi');
+const cors = require('cors');
 // const user = require('./user/controller.js')
 const app = express();
 const port = 3000;
 const server = "localhost";
+app.use(cors());
 app.use(express.json());
 
 // const {User} = require('./model'); 
 // var user = new User();
 // var
 
-const users = [
-    {id: 1, name: 'faizan', exercises: 'sit-ups'},
-    {id: 2, name: 'amy', exercises: 'push-ups'},
-    {id: 3, name: 'don', exercises: 'pull-ups'},
-];
+const users = 
+    {name: 'faizan', exercises: 'sit-ups'}
+//    {name: 'amy', exercises: 'push-ups'},
+//    {name: 'don', exercises: 'pull-ups'},
+;
 
 //validate user
 function validateUser(user) {
