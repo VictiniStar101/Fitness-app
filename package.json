@@ -38,8 +38,36 @@
   },
   "author": "Faizan Jamil",
   "license": "ISC",
+  "homepage": "https://github.com/VictiniStar101/Fitness-app#readme",
   "bugs": {
     "url": "https://github.com/VictiniStar101/Fitness-app/issues"
   },
-  "homepage": "https://github.com/VictiniStar101/Fitness-app#readme"
-}
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "rules": {
+      "no-console": 0
+    },
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "globals": {
+      "FB": false
+    }
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]}
