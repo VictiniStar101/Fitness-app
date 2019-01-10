@@ -11,7 +11,8 @@
             <h6>Name</h6>
             <p>Faizan</p>
             <h6>Nickname</h6>
-            <p>None</p>
+            <p v-if="nickname==''">None</p>
+            <p v-else> {{nickname}} </p>
             <h6>Exercises</h6>
             <ul class="list-group list-group-flush">
               <li class="list-group-item">First item</li>
@@ -27,9 +28,9 @@
               <form>
                 <div class="form-group">
                   <label for="nickname">Add/Change Nickname (optional)</label>
-                  <input type="nickname" class="form-control" id="newNickname" aria-describedby="NicknameHelp" placeholder="Enter nickname">
+                  <input type="nickname" v-model="nickname" class="form-control" id="newNickname" aria-describedby="NicknameHelp" placeholder="Enter nickname">
                 </div>
-                <button type="submit" class="btn btn-primary">Submit
+                <button @click="submitNickname" class="btn btn-primary">Submit
                 </button>
 
                 <div class="form-group">
@@ -56,13 +57,29 @@
 </template>
 
 <script>
+// have btn execute javascript to take text from field 
+// and send that post request via axios
+import axios from 'axios'
 export default {
   name: 'profile',
   data () {
     return {
       nickname: '',
       user: 'faizan',
-      exercises: []
+      exercises: [],
+      name: ''
+    }
+  },
+  methods: {
+    submitNickname() {
+      //console.log(this.nickname);
+      //use axios for POST request which changes nickname
+      axios
+        .put('http://localhost:3000/api/users/' + this.user)
+        .then(response => (this.nickname = response.data.nickname))
+        .catch(error => {
+          console.log(error.response)
+        });
     }
   }
 }
