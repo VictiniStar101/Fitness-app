@@ -58,6 +58,16 @@ app.post('/api/users/add', (req, res) => {
     users.push(user);
     res.send(user);
 });
+
+//lookup user with name specified
+app.get('/api/users/:name', (req, res) => {
+    //if not found, return 404
+    let user = users.find(c => c.name === req.params.name);
+    if (!user) res.status(404).send('The user with the given id was not found');
+    
+    //return user to client
+    res.send(user);
+});
 //updates user with name specified
 app.put('/api/users/update/:name', (req, res) => {
     //if not existing return 404
