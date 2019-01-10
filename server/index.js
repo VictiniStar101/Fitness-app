@@ -1,10 +1,11 @@
 const express = require('express');
-const Joi = require('joi');
+//const Joi = require('joi');
 const cors = require('cors');
 // const user = require('./user/controller.js')
 const app = express();
 const port = 3000;
 const server = "localhost";
+// access control
 app.use(cors());
 app.use(express.json());
 
@@ -12,22 +13,21 @@ app.use(express.json());
 // var user = new User();
 // var
 
-const users = 
-    {name: 'faizan', exercises: 'sit-ups'}
-//    {name: 'amy', exercises: 'push-ups'},
-//    {name: 'don', exercises: 'pull-ups'},
-;
+const users = [
+    {name: "faizan", exercises: "sit-ups", nickname: "jamilf"},
+    {name: "amy", exercises: "push-ups", nickname: ""},
+    {name: "don", exercises: "pull-ups", nickname: ""},
+];
 
 //validate user
-function validateUser(user) {
+/*function validateUser(user) {
     const schema = {
         name: Joi.string().min(2).required(),
         exercises: Joi.string().required()
     }
     return Joi.validate(user, schema);
     
-}
-// access control
+}*/
 
 // define example routes
 // if user were to go to /, would print hello world
@@ -50,17 +50,18 @@ app.post('/api/users/add', (req, res) => {
 
     //creates data for user
     const user = {
-        id: users.length + 1,
+        //id: users.length + 1,
         name: req.body.name,
-        exercises: req.body.exercises
+        exercises: req.body.exercises,
+        nickname: ""
     };
     users.push(user);
     res.send(user);
 });
-//updates user with id specified
-app.put('/api/users/update/:id', (req, res) => {
+//updates user with name specified
+app.put('/api/users/update/:name', (req, res) => {
     //if not existing return 404
-    let user = users.find(c => c.id === parseInt(req.params.id));
+    let user = users.find(c => c.name === req.params.name);
     if (!user) res.status(404).send('The user with the given id was not found');
     
     //validate
@@ -76,20 +77,26 @@ app.put('/api/users/update/:id', (req, res) => {
     //updates name
     //updates exercises
     //will use for other properties
-    user.name = req.body.name;
-    user.exercises = req.body.exercises;
+    //user.name = req.body.name;
+    if ((req.body.exercises !== "") && (req.body.exercises !== undefined)) {
+        user.exercises = user.exercises + ", " + req.body.exercises;
+    }
+    if ((req.body.nickname !== "") && (req.body.nickname !== undefined)) {
+        user.nickname = req.body.nickname;
+    }
+
     //return user to client
     res.send(user);
 });
 
 
 //get user name corresponding to id entered
-app.get('/api/users/:id', (req, res) => {
+/*app.get('/api/users/:id', (req, res) => {
     let user = users.find(c => c.id === parseInt(req.params.id));
     if (!user) res.status(404).send('The user with the given id was not found');
     res.send(user);
     //res.send(req.params);
-});
+}); */
 
 //delete user (Not Functioning)
 /*app.delete('api/users/:id', (req, res) => {
