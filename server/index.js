@@ -14,7 +14,7 @@ app.use(express.json());
 // var
 
 const users = [
-    {name: "faizan", exercises: "sit-ups", nickname: "jamilf"},
+    {name: "Faizan", exercises: "sit-ups", nickname: "jamilf"},
     {name: "amy", exercises: "push-ups", nickname: ""},
     {name: "don", exercises: "pull-ups", nickname: ""},
 ];

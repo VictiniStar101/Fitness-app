@@ -10,14 +10,15 @@ import axios from 'axios'
 export default {
   data () {
     return {
-      info: null
+      info: null,
+      user: 'faizan'
     }
   },
   mounted () {
     axios
       //.get('https://api.coindesk.com/v1/bpi/currentprice.json')
-      .get('http://localhost:3000/api/users')
-      .then(response => (this.info = response.data))
+      .get('http://localhost:3000/api/users/' + this.user)
+      .then(response => (this.info = response.data.name))
       .catch(error => {
         console.log(error.response)
       });
