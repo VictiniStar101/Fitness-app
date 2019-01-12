@@ -80,21 +80,40 @@ export default {
       nickname: '',
       user: '',
       exercises: [],
-      name: '',
       loggedIn: false
     }
   },
-  mounted: {
-
-  },
   methods: {
+    logout() {
+      this.loggedIn = false;
+    },
     login() {
       axios
-        .post('http://localhost:3000/api/users/add' + this.user)
-        .then(response => (this.user = response.data.name))
+        // check to see if user trying to login exists
+        .get('http://localhost:3000/api/users/' + this.user)
+        // if user exists then login with that user
+        .then(response => {
+          console.log("user exists, logging in...")
+          this.user = response.data.name
+          this.nickname = response.data.nickname})
         .catch(error => {
-          console.log(error.response)
-        });
+          console.log(error)
+          // if status code is 404
+          if (error.response.status == 404) {
+            console.log("creating new user");
+          // create new user and get their name back
+          axios
+            // POST request which adds user
+            .post('http://localhost:3000/api/users/add' + this.user)
+            // sets name to user that was just created
+            .then(response => {this.user = response.data.name
+            this.nickname = response.data.nickname})
+            .catch(error => {
+              console.log(error.response)
+          });
+        
+        }
+      });
       this.loggedIn = true;
     },
     submitNickname() {
