@@ -25,41 +25,38 @@
               <h6>Name</h6>
               <p>{{ user }}</p>
               <h6>Nickname</h6>
-              <p v-if="nickname==''">None</p>
-              <p v-else> {{nickname}} </p>
+              <p v-if="clientNickname==''">None</p>
+              <p v-else> {{ clientNickname }} </p>
               <h6>Exercises</h6>
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">First item</li>
                 <li class="list-group-item">Second item</li>
                 <li class="list-group-item">Third item</li>
               </ul>
+              <br />
+              <button @click="logout" type="button" class="btn btn-danger">Log out</button>
             </div>
             <div class="col" >
-                <!--You are logged in-->
-                <h5>Profile settings</h5>
-                <form>
-                  <div class="form-group">
-                    <label for="nickname">Add/Change Nickname (optional)</label>
-                    <input type="nickname" v-model="nickname" class="form-control" id="newNickname" aria-describedby="NicknameHelp" placeholder="Enter nickname">
-                  </div>
-                  <button @click="submitNickname" class="btn btn-primary">Submit
-                  </button>
-
-                  <div class="form-group">
-                    <br />
-
-                    <label for="exampleInputPassword1">Add Exercise</label>
-                    <input type="exercise" class="form-control" id="exerciseAdded" placeholder="Enter an Exercise">
-                  </div>
-                  <button type="button" class="btn btn-success">Add</button>
-                  <button type="button" class="btn btn-danger">Delete</button>
-                  <!--
-                  <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                  </div>
-                  -->
-                </form>
+              <!--You are logged in-->
+              <h5>Profile settings</h5>
+              <form>
+                
+                <div class="form-group">
+                  <label for="nickname">Add/Change Nickname (optional)</label>
+                  <input type="nicknameInput" v-model="nicknameHolder" class="form-control" id="newNickname" aria-describedby="NicknameHelp" placeholder="Enter nickname">
+                </div>
+                
+                <button @click="submitNickname" class="btn btn-primary">Submit</button>
+                
+                <div class="form-group">
+                  <br />
+                  <label for="exampleInputPassword1">Add Exercise</label>
+                  <input v-model="exerciseHolder" type="exercise" class="form-control" id="exerciseAdded" placeholder="Enter an Exercise">
+                </div>
+                <button @click="addExercises" type="button" class="btn btn-success">Add</button>
+                <button @click="fetchExercises" type="button" class="btn btn-danger">Delete</button>
+                
+              </form>
               
             </div>
           </div>
@@ -77,15 +74,24 @@ export default {
   name: 'profile',
   data () {
     return {
-      nickname: '',
-      user: '',
-      exercises: [],
+      nicknameHolder: "",
+      clientNickname: "",
+      nickname: "",
+      user: "",
+      exercise: "",
+      exerciseHolder: "",
+      clientExercises: [],
       loggedIn: false
     }
   },
   methods: {
     logout() {
       this.loggedIn = false;
+      this.clientNickname = "";
+      this.nicknameHolder = "";
+      this.exercises = [];
+      this.exerciseHolder = "";
+      this.user = "";
     },
     login() {
       axios
@@ -95,7 +101,10 @@ export default {
         .then(response => {
           console.log("user exists, logging in...")
           this.user = response.data.name
-          this.nickname = response.data.nickname})
+          //console.log(response.data.nickname)
+          this.clientNickname = response.data.nickname  
+          })
+        // else if error is 404, create new user
         .catch(error => {
           console.log(error)
           // if status code is 404
@@ -107,24 +116,60 @@ export default {
             .post('http://localhost:3000/api/users/add' + this.user)
             // sets name to user that was just created
             .then(response => {this.user = response.data.name
-            this.nickname = response.data.nickname})
+              this.nicknameHolder = response.data.nickname
+              this.clientNickname = this.nicknameHolder
+              this.$data.nicknameHolder = ""  })
             .catch(error => {
               console.log(error.response)
-          });
-        
-        }
+            });
+          }
       });
       this.loggedIn = true;
+      
     },
     submitNickname() {
       //console.log(this.nickname);
       //use axios for POST request which changes nickname
-      axios
-        .put('http://localhost:3000/api/users/' + this.user)
-        .then(response => (this.nickname = response.data.nickname))
+      axios.put('http://localhost:3000/api/users/update/' + this.user ,{
+        nickname: this.nicknameHolder
+        })
+        .then(response => {this.clientNickname = response.data.nickname
+          this.nicknameHolder = ''})
         .catch(error => {
           console.log(error.response)
-        });
+      });
+    },
+    fetchExercises() {
+      // fetch full string from user
+      // store string into exercises array above
+      // iterate through them using vue lists
+      // use push method on array
+      axios
+        .get('http://localhost:3000/api/users/' + this.user)
+        .then(response => {
+          this.exercises = response.data.exercises.split(", ")
+          for (let i = 0; i < this.exercises.length; i++) {
+            console.log(this.exercises[i]);
+          }
+      });
+    },
+    addExercises() {
+      // console.log("exercise added")
+      axios
+        .put('http://localhost:3000/api/users/update/' + this.user, {
+          "exercises": this.exerciseHolder
+        })
+        .then(response => {
+          //console.log("\n " + this.exercise)
+          //this.exercise = response.data.exercises
+          console.log(response.data.exercises)
+          //console.log("\n " + this.exercise)
+          //this.exercise = "" 
+          //fetchExercises() 
+          })
+        .catch(error => {
+          console.log(error.response)
+      });
     }
   }
 }

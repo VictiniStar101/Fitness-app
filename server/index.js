@@ -63,7 +63,7 @@ app.post('/api/users/add', (req, res) => {
 app.get('/api/users/:name', (req, res) => {
     //if not found, return 404
     let user = users.find(c => c.name === req.params.name);
-    if (!user) res.status(404).send('The user with the given id was not found');
+    if (!user) res.status(404).send('The user with the given name was not found');
     
     //return user to client
     res.send(user);
@@ -72,7 +72,7 @@ app.get('/api/users/:name', (req, res) => {
 app.put('/api/users/update/:name', (req, res) => {
     //if not existing return 404
     let user = users.find(c => c.name === req.params.name);
-    if (!user) res.status(404).send('The user with the given id was not found');
+    if (!user) res.status(404).send('The user with the given name was not found');
     
     //validate
     /*
