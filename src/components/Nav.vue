@@ -14,6 +14,10 @@
       <li class="nav-item">
         <router-link class="nav-link" to="/profile">Profile</router-link>
       </li>
+      <!-- skills link -->
+      <!--<li class="nav-item">
+        <router-link class="nav-link" to="/skills">Skills</router-link>
+      </li>-->
     </ul>
   </nav>
   <!--

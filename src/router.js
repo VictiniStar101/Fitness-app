@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import About from './views/About.vue'
 import Profile from './views/Profile.vue'
+//import Skills from './views/Skills.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -26,5 +27,10 @@ export default new Router({
       name: 'profile',
       component: Profile
     }
+    // {
+    //  path: '/skills',
+    //  name: 'skills',
+    //  component: Skills
+    // }
   ]
 })

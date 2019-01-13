@@ -29,9 +29,7 @@
               <p v-else> {{ clientNickname }} </p>
               <h6>Exercises</h6>
               <ul class="list-group list-group-flush">
-                <li class="list-group-item">First item</li>
-                <li class="list-group-item">Second item</li>
-                <li class="list-group-item">Third item</li>
+                  <li v-for="(data) in clientExercises"  class="list-group-item">{{data}}</li>                
               </ul>
               <br />
               <button @click="logout" type="button" class="btn btn-danger">Log out</button>
@@ -80,7 +78,7 @@ export default {
       user: "",
       exercise: "",
       exerciseHolder: "",
-      clientExercises: [],
+      clientExercises: ["this"],
       loggedIn: false
     }
   },
@@ -125,7 +123,7 @@ export default {
           }
       });
       this.loggedIn = true;
-      
+      this.fetchExercises();
     },
     submitNickname() {
       //console.log(this.nickname);
@@ -147,9 +145,9 @@ export default {
       axios
         .get('http://localhost:3000/api/users/' + this.user)
         .then(response => {
-          this.exercises = response.data.exercises.split(", ")
-          for (let i = 0; i < this.exercises.length; i++) {
-            console.log(this.exercises[i]);
+          this.clientExercises = response.data.exercises.split(", ")
+          for (let i = 0; i < this.clientExercises.length; i++) {
+            console.log(this.clientExercises[i]);
           }
       });
     },
@@ -162,16 +160,19 @@ export default {
         .then(response => {
           //console.log("\n " + this.exercise)
           //this.exercise = response.data.exercises
-          console.log(response.data.exercises)
+          this.fetchExercises() 
+          //console.log("function has executed")
           //console.log("\n " + this.exercise)
           //this.exercise = "" 
-          //fetchExercises() 
           })
         .catch(error => {
           console.log(error.response)
       });
     }
   }
+  // beforeMount() {
+  //   this.fetchExercises()
+  // }
 }
 </script>
 

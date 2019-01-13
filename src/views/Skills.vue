@@ -3,12 +3,13 @@
   <!-- where HTML goes -->
   <div class="hello">
     <div class="holder">
-      <!-- for loop example
+      <!-- for loop example -->
+      
       <ul>
         <li v-for="(data, index) in skills" :key='index'> {{index}}. {{data.skill}}
         </li>
       </ul>
-      -->
+      
       <!-- conditional example
       <p v-if="skills.length >= 1"> You have more than one skill</p>
       <p v-else>You have less than one skill</p>
