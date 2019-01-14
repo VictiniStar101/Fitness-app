@@ -27,9 +27,13 @@
               <h6>Nickname</h6>
               <p v-if="clientNickname==''">None</p>
               <p v-else> {{ clientNickname }} </p>
+              <h6>Steps Taken</h6>
+              <p v-if="clientSteps != ''">{{ clientSteps }}</p>
+              <p v-else>0</p>
               <h6>Exercises</h6>
               <ul class="list-group list-group-flush">
-                  <li v-for="(data) in clientExercises"  class="list-group-item">{{data}}</li>                
+                <!-- iterates through clientExercises and displays values-->
+                <li v-for="(data) in clientExercises"  class="list-group-item">{{ data }}</li>                
               </ul>
               <br />
               <button @click="logout" type="button" class="btn btn-danger">Log out</button>
@@ -45,7 +49,16 @@
                 </div>
                 
                 <button @click="submitNickname" class="btn btn-primary">Submit</button>
-                
+                <br />
+                <div class="form-group">
+                  <br />
+                  <label for="steps">Change number of steps taken)</label>
+                  <!-- one way binding used -->
+                  <input v-model="stepsHolder" type="stepsInput" class="form-control" id="stepCount" aria-describedby="NicknameHelp" placeholder="Enter steps taken">
+                </div>
+                <button @click="changeSteps" class="btn btn-primary">Submit</button>
+                <!--<button @click="resetSteps" class="btn btn-danger">Reset steps</button>
+                -->
                 <div class="form-group">
                   <br />
                   <label for="exampleInputPassword1">Add Exercise</label>
@@ -78,8 +91,10 @@ export default {
       user: "",
       exercise: "",
       exerciseHolder: "",
-      clientExercises: ["this"],
-      loggedIn: false
+      clientExercises: [],
+      loggedIn: false,
+      clientSteps: '',
+      stepsHolder: ''
     }
   },
   methods: {
@@ -90,6 +105,7 @@ export default {
       this.exercises = [];
       this.exerciseHolder = "";
       this.user = "";
+      this.clientSteps = '';
     },
     login() {
       axios
@@ -101,7 +117,9 @@ export default {
           this.user = response.data.name
           //console.log(response.data.nickname)
           this.clientNickname = response.data.nickname  
-          })
+          if (response.data.steps > 0)
+            this.clientSteps = response.data.steps
+        })
         // else if error is 404, create new user
         .catch(error => {
           console.log(error)
@@ -164,10 +182,24 @@ export default {
           //console.log("function has executed")
           //console.log("\n " + this.exercise)
           //this.exercise = "" 
-          })
+        })
         .catch(error => {
           console.log(error.response)
       });
+    },
+    changeSteps() {
+      axios
+        .put('http://localhost:3000/api/users/update/' + this.user, {
+          steps: parseInt(this.stepsHolder)
+        })
+        .then(response => {
+          this.stepsHolder = response.data.steps.toString()
+          this.clientSteps = this.stepsHolder
+          this.stepsHolder = ''
+        })
+        .catch(error => {
+          console.log(error.response)
+      });        
     }
   }
   // beforeMount() {
@@ -178,8 +210,8 @@ export default {
 
 <style scoped>
 
-  .btn-success {
-    margin-right: 30px;
+  .btn-danger {
+    margin-left: 30px;
 
   }
 </style>

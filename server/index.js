@@ -14,7 +14,7 @@ app.use(express.json());
 // var
 
 const users = [
-    {name: "Faizan", exercises: "sit-ups", nickname: "jamilf"},
+    {name: "Faizan", exercises: "sit-ups", nickname: "jamilf", steps: 0},
     {name: "amy", exercises: "push-ups", nickname: ""},
     {name: "don", exercises: "pull-ups", nickname: ""},
 ];
@@ -53,7 +53,8 @@ app.post('/api/users/add', (req, res) => {
         //id: users.length + 1,
         name: req.body.name,
         exercises: req.body.exercises,
-        nickname: ""
+        nickname: "",
+        steps: 0
     };
     users.push(user);
     res.send(user);
@@ -94,7 +95,9 @@ app.put('/api/users/update/:name', (req, res) => {
     if ((req.body.nickname !== "") && (req.body.nickname !== undefined)) {
         user.nickname = req.body.nickname;
     }
-
+    if (req.body.steps > 0) {
+        user.steps = req.body.steps;
+    }
     //return user to client
     res.send(user);
 });
