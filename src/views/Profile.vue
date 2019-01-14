@@ -57,8 +57,8 @@
                   <input v-model="stepsHolder" type="stepsInput" class="form-control" id="stepCount" aria-describedby="NicknameHelp" placeholder="Enter steps taken">
                 </div>
                 <button @click="changeSteps" class="btn btn-primary">Submit</button>
-                <!--<button @click="resetSteps" class="btn btn-danger">Reset steps</button>
-                -->
+                <button @click="resetSteps" class="btn btn-danger">Reset steps</button>
+                
                 <div class="form-group">
                   <br />
                   <label for="exampleInputPassword1">Add Exercise</label>
@@ -150,6 +150,7 @@ export default {
         nickname: this.nicknameHolder
         })
         .then(response => {this.clientNickname = response.data.nickname
+          // clears nickname text field
           this.nicknameHolder = ''})
         .catch(error => {
           console.log(error.response)
@@ -170,18 +171,16 @@ export default {
       });
     },
     addExercises() {
-      // console.log("exercise added")
+      // performs POST request to add exercises to string at backend
       axios
         .put('http://localhost:3000/api/users/update/' + this.user, {
+          // adds value to exercises string instead of replacing it
           "exercises": this.exerciseHolder
         })
         .then(response => {
-          //console.log("\n " + this.exercise)
-          //this.exercise = response.data.exercises
+          // fetch exercises
           this.fetchExercises() 
-          //console.log("function has executed")
-          //console.log("\n " + this.exercise)
-          //this.exercise = "" 
+          
         })
         .catch(error => {
           console.log(error.response)
@@ -190,16 +189,37 @@ export default {
     changeSteps() {
       axios
         .put('http://localhost:3000/api/users/update/' + this.user, {
+          // grabs value of stepsHolder (a string)
+          // converts it to int, places value in response in clientSteps
+          // holder var is used to clear text field
           steps: parseInt(this.stepsHolder)
         })
         .then(response => {
+          // stores response in clientSteps
           this.stepsHolder = response.data.steps.toString()
           this.clientSteps = this.stepsHolder
+          // clears text field
           this.stepsHolder = ''
         })
         .catch(error => {
           console.log(error.response)
       });        
+    },
+    resetSteps() {
+      // sends a steps value of 0
+      // resets step counter 0
+      axios
+        .put('http://localhost:3000/api/users/update/' + this.user, {
+          steps: 0
+        })
+        .then(response => {
+          this.clientSteps = ''
+          this.stepsHolder = ''
+        })
+        .catch(error => {
+          console.log(error.response)
+      });         
+
     }
   }
   // beforeMount() {
