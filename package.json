@@ -39,9 +39,9 @@
   },
   "author": "Faizan Jamil",
   "license": "ISC",
-  "homepage": "https://github.com/VictiniStar101/Fitness-app#readme",
+  "homepage": "https://github.com/faizjamil/Fitness-app#readme",
   "bugs": {
-    "url": "https://github.com/VictiniStar101/Fitness-app/issues"
+    "url": "https://github.com/faizjamil/Fitness-app/issues"
   },
   "eslintConfig": {
     "root": true,

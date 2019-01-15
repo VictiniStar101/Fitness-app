@@ -30,13 +30,16 @@
               <h6>Steps Taken</h6>
               <p v-if="clientSteps != ''">{{ clientSteps }}</p>
               <p v-else>0</p>
+              <h6>Steps (in miles)</h6>
+              <p v-if="miles != ''">{{ miles }}</p>
+              <p v-else>0</p>
               <h6>Exercises</h6>
               <ul class="list-group list-group-flush">
                 <!-- iterates through clientExercises and displays values-->
                 <li v-for="(data) in clientExercises"  class="list-group-item">{{ data }}</li>                
               </ul>
               <br />
-              <button @click="logout" type="button" class="btn btn-danger">Log out</button>
+              <button @click="logout" type="button" class="btn btn-dark">Log out</button>
             </div>
             <div class="col" >
               <!--You are logged in-->
@@ -94,7 +97,8 @@ export default {
       clientExercises: [],
       loggedIn: false,
       clientSteps: '',
-      stepsHolder: ''
+      stepsHolder: '',
+      miles: ''
     }
   },
   methods: {
@@ -106,6 +110,7 @@ export default {
       this.exerciseHolder = "";
       this.user = "";
       this.clientSteps = '';
+      this.miles = '';
     },
     login() {
       axios
@@ -177,6 +182,7 @@ export default {
           // adds value to exercises string instead of replacing it
           "exercises": this.exerciseHolder
         })
+        // eslint-disable-next-line
         .then(response => {
           // fetch exercises
           this.fetchExercises() 
@@ -200,6 +206,7 @@ export default {
           this.clientSteps = this.stepsHolder
           // clears text field
           this.stepsHolder = ''
+          this.miles = (parseFloat(this.clientSteps).toPrecision(12) / 2000 )
         })
         .catch(error => {
           console.log(error.response)
@@ -212,15 +219,17 @@ export default {
         .put('http://localhost:3000/api/users/update/' + this.user, {
           steps: 0
         })
+        // eslint-disable-next-line
         .then(response => {
           this.clientSteps = ''
           this.stepsHolder = ''
+          this.miles = ''
         })
         .catch(error => {
           console.log(error.response)
       });         
 
-    }
+    },
   }
   // beforeMount() {
   //   this.fetchExercises()
@@ -232,7 +241,7 @@ export default {
 
   .btn-danger {
     margin-left: 30px;
-
+  
   }
 </style>
 
