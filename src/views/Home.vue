@@ -8,7 +8,13 @@
       <p>
         Click the button below to access the app
       </p>
-      <button type="button" class="btn btn-primary">App</button>
+      <a href="#/profile" class="btn btn-primary">App</a>
+      <!--<button type="button" class="btn btn-primary">
+        App
+        <router-link class="btn btn-primary" to="/profile">
+        </router-link>
+      </button>-->
+      
 
     </div>
   </div>
