@@ -14,7 +14,7 @@ app.use(express.json());
 // var
 
 const users = [
-    {name: "Faizan", exercises: "sit-ups", nickname: "jamilf", steps: 0},
+    {name: "Faizan", exercises: "sit-ups", nickname: "jamilf", steps: 0 , reps: [3]},
     {name: "amy", exercises: "push-ups", nickname: ""},
     {name: "don", exercises: "pull-ups", nickname: ""},
 ];
@@ -54,7 +54,7 @@ app.post('/api/users/add', (req, res) => {
         name: req.body.name,
         exercises: req.body.exercises,
         nickname: "",
-        steps: 0
+        steps: 0,
     };
     users.push(user);
     res.send(user);

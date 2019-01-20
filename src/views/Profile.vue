@@ -34,10 +34,12 @@
               <p v-if="miles != ''">{{ miles }}</p>
               <p v-else>0</p>
               <h6>Exercises</h6>
-              <ul class="list-group list-group-flush">
+              <div class="list-group list-group-flush">
                 <!-- iterates through clientExercises and displays values-->
-                <li v-for="(data) in clientExercises"  class="list-group-item">{{ data }}</li>                
-              </ul>
+                <a href="#" class="list-group-item list-group-item-action" v-for="(data) in clientExercises">
+                  {{ data }}
+                </a>                
+              </div>
               <br />
               <button @click="logout" type="button" class="btn btn-dark">Log out</button>
             </div>
