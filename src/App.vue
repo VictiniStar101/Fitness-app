@@ -16,7 +16,11 @@
 </style>
 <script>
 import Nav from '@/components/Nav.vue'
-
+// imports needed for dropdown to work
+import 'bootstrap'
+import 'popper.js'
+import 'jquery'
+import 'ajv'
 export default {
   name: 'home',
   components: {

@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    
     <!--
     <img alt="Vue logo" src="../assets/logo.png" style="width:100px;height:100px">
     <About msg="Welcome to Your Vue.js App"/>
@@ -13,15 +14,14 @@
         App
         <router-link class="btn btn-primary" to="/profile">
         </router-link>
-      </button>-->
-      
-
+      </button>-->  
     </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
+
 export default {
   name: 'home',
 }

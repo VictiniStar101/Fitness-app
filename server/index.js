@@ -55,6 +55,7 @@ app.post('/api/users/add', (req, res) => {
         exercises: req.body.exercises,
         nickname: "",
         steps: 0,
+        reps: []
     };
     users.push(user);
     res.send(user);
@@ -97,6 +98,9 @@ app.put('/api/users/update/:name', (req, res) => {
     }
     if (req.body.steps > 0) {
         user.steps = req.body.steps;
+    }
+    if ((req.body.reps !== []) && (req.body.reps !== undefined)) {
+        user.reps = req.body.reps;
     }
     //return user to client
     res.send(user);

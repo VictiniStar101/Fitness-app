@@ -34,10 +34,14 @@
               <p v-if="miles != ''">{{ miles }}</p>
               <p v-else>0</p>
               <h6>Exercises</h6>
+              <!--<div class="list-group list-group-flush">-->
               <div class="list-group list-group-flush">
+  
                 <!-- iterates through clientExercises and displays values-->
-                <a href="#" class="list-group-item list-group-item-action" v-for="(data) in clientExercises">
-                  {{ data }}
+                <a href="#" class="list-group-item d-flex justify-content-between align-items-center" v-for="(data, index) in clientExercises" :key='index'>
+                {{ data }}
+                <span v-if="clientReps[index] != undefined" class="badge badge-primary badge-pill">{{ clientReps[index] }} </span>
+                <span v-else class="badge badge-primary badge-pill">0</span>
                 </a>                
               </div>
               <br />
@@ -73,7 +77,25 @@
                 <button @click="fetchExercises" type="button" class="btn btn-danger">Delete</button>
                 
               </form>
-              
+              <br />
+              <h6>Add/remove reps</h6>
+              <div class="dropdown">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                  {{ dropdownText }}
+                </button>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="#!" v-for="(data, index) in clientExercises" :key='index'
+                  @click="dropdownText = data" >
+                    {{ data }}
+                  </a>
+                  
+                  
+                </div>
+              </div>
+              <br />
+              <button @click="changeReps('add')" type="button" class="btn btn-success">Add</button>
+              <button @click="changeReps('remove')" type="button" class="btn btn-danger">Delete</button>
+                
             </div>
           </div>
         </div>
@@ -96,11 +118,13 @@ export default {
       user: "",
       exercise: "",
       exerciseHolder: "",
+      dropdownText: "Select an exercise",
       clientExercises: [],
       loggedIn: false,
       clientSteps: '',
       stepsHolder: '',
-      miles: ''
+      miles: '',
+      clientReps: []
     }
   },
   methods: {
@@ -113,6 +137,7 @@ export default {
       this.user = "";
       this.clientSteps = '';
       this.miles = '';
+      this.clientReps = [];
     },
     login() {
       axios
@@ -172,8 +197,9 @@ export default {
         .get('http://localhost:3000/api/users/' + this.user)
         .then(response => {
           this.clientExercises = response.data.exercises.split(", ")
+          this.clientReps = response.data.reps
           for (let i = 0; i < this.clientExercises.length; i++) {
-            console.log(this.clientExercises[i]);
+            console.log(this.clientExercises[i] + "reps: " + this.clientReps[i]);
           }
       });
     },
@@ -232,6 +258,49 @@ export default {
       });         
 
     },
+    changeReps(operation) {
+      if (operation === 'add') {
+        for (let i = 0; i < this.clientExercises.length; i++) {
+          if (this.dropdownText === this.clientExercises[i]) {
+            this.clientReps[i] = this.clientReps[i] + 1;
+            axios
+              .put('http://localhost:3000/api/users/update/' + this.user, {
+                reps: this.clientReps
+              })
+              .then(response => {
+                // stores response in clientSteps
+                this.clientReps = response.data.reps
+              })
+              .catch(error => {
+                console.log(error.response)
+            });
+          }
+        }
+      } else if (operation === 'remove') {
+        for (let i = 0; i < this.clientExercises.length; i++) {
+          if (this.dropdownText === this.clientExercises[i]) {
+            this.clientReps[i] = this.clientReps[i] - 1;
+            axios
+              .put('http://localhost:3000/api/users/update/' + this.user, {
+                reps: this.clientReps
+              })
+              .then(response => {
+                // stores response in clientReps
+                this.clientReps = response.data.reps
+              })
+              .catch(error => {
+                console.log(error.response)
+            });
+          }
+        }
+      } else {
+        console.log("error has occured");
+      }
+      //POST request to add one to rep counter of exercise array
+      //get location of exercise chosen in dropdown of array
+      //use location to add one to value in reps at location
+      //exercise is located
+    }
   }
   // beforeMount() {
   //   this.fetchExercises()
