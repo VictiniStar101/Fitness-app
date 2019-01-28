@@ -259,16 +259,20 @@ export default {
 
     },
     changeReps(operation) {
+      // if add is passed, 
       if (operation === 'add') {
         for (let i = 0; i < this.clientExercises.length; i++) {
+          //get exercise that is selected from dropdown
           if (this.dropdownText === this.clientExercises[i]) {
+            //adds to rep counter which corresponds to exercise selected
             this.clientReps[i] = this.clientReps[i] + 1;
             axios
               .put('http://localhost:3000/api/users/update/' + this.user, {
+                //replaces reps array on server with clientReps
                 reps: this.clientReps
               })
               .then(response => {
-                // stores response in clientSteps
+                // stores response in clientReps
                 this.clientReps = response.data.reps
               })
               .catch(error => {
@@ -276,9 +280,12 @@ export default {
             });
           }
         }
+      // if remove is passed to function
       } else if (operation === 'remove') {
+        //get exercise that is selected from dropdown
         for (let i = 0; i < this.clientExercises.length; i++) {
           if (this.dropdownText === this.clientExercises[i]) {
+            //subtracts one from rep counter which corresponds to exercise selected
             this.clientReps[i] = this.clientReps[i] - 1;
             axios
               .put('http://localhost:3000/api/users/update/' + this.user, {
@@ -296,15 +303,9 @@ export default {
       } else {
         console.log("error has occured");
       }
-      //POST request to add one to rep counter of exercise array
-      //get location of exercise chosen in dropdown of array
-      //use location to add one to value in reps at location
-      //exercise is located
     }
   }
-  // beforeMount() {
-  //   this.fetchExercises()
-  // }
+
 }
 </script>
 
