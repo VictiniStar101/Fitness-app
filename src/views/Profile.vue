@@ -147,7 +147,6 @@ export default {
         .then(response => {
           console.log("user exists, logging in...")
           this.user = response.data.name
-          //console.log(response.data.nickname)
           this.clientNickname = response.data.nickname  
           if (response.data.steps > 0)
             this.clientSteps = response.data.steps
