@@ -11,29 +11,29 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "ajv": "^6.7.0",
-    "ajv-keywords": "^3.2.0",
+    "ajv": "^6.9.2",
+    "ajv-keywords": "^3.4.0",
     "axios": "^0.18.0",
-    "bootstrap": "^4.2.1",
+    "bootstrap": "^4.3.1",
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "joi": "^14.0.0",
     "jquery": "^3.3.1",
-    "popper.js": "^1.14.6",
-    "vue": "^2.5.17",
+    "popper.js": "^1.14.7",
+    "vue": "^2.6.7",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.2.0",
-    "@vue/cli-plugin-eslint": "^3.2.0",
-    "@vue/cli-service": "^3.2.0",
+    "@vue/cli-plugin-babel": "^3.4.1",
+    "@vue/cli-plugin-eslint": "^3.4.1",
+    "@vue/cli-service": "^3.4.1",
     "@vue/eslint-config-standard": "^4.0.0",
     "babel-eslint": "^10.0.1",
-    "eslint": "^5.8.0",
-    "eslint-plugin-vue": "^5.0.0-0",
+    "eslint": "^5.14.1",
+    "eslint-plugin-vue": "^5.2.2",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.0.1",
-    "vue-template-compiler": "^2.5.17"
+    "vue-template-compiler": "^2.6.7"
   },
   "repository": {
     "type": "git",
